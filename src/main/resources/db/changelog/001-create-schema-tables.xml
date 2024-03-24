@@ -14,11 +14,12 @@
     <!-- Создание таблиц в схеме -->
     <changeSet id="2" author="suhoi" >
         <createTable schemaName="idf" tableName="transactions">
-            <column name="id" type="BIGINT">
+            <column name="transaction_id" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="currency" type="VARCHAR(255)"/>
             <column name="amount" type="NUMERIC(19, 2)"/>
+            <column name="currency" type="VARCHAR(255)"/>
+            <column name="category" type="VARCHAR(255)"/>
             <column name="transaction_date" type="TIMESTAMP"/>
             <column name="limit_exceeded" type="BOOLEAN"/>
         </createTable>
@@ -26,13 +27,13 @@
 
     <changeSet id="3" author="suhoi">
         <createTable schemaName="idf" tableName="limits">
-            <column name="id" type="BIGINT">
+            <column name="limit_id" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="balance" type="NUMERIC(19, 2)"/>
             <column name="amount" type="NUMERIC(19, 2)"/>
-            <column name="limit_date" type="TIMESTAMP"/>
-            <column name="currency" type="VARCHAR(255)"/>
             <column name="category" type="VARCHAR(255)"/>
+            <column name="limit_date" type="TIMESTAMP"/>
         </createTable>
     </changeSet>
 

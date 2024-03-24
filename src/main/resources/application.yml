@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: password
+    url: jdbc:postgresql://localhost:5432/suhoiDB
+  liquibase:
+    enabled: true
+    change-log: db/changelog/changelog.xml
+    default-schema: migration
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/suhoiDB
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            url: https://api.twelvedata.com
+      currencies:
+        - USD/KZT
+        - USD/RUB
