@@ -12,20 +12,8 @@
     </changeSet>
 
     <!-- Создание таблиц в схеме -->
-    <changeSet id="2" author="suhoi" >
-        <createTable schemaName="idf" tableName="transactions">
-            <column name="transaction_id" type="BIGINT">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="amount" type="NUMERIC(19, 2)"/>
-            <column name="currency" type="VARCHAR(255)"/>
-            <column name="category" type="VARCHAR(255)"/>
-            <column name="transaction_date" type="TIMESTAMP"/>
-            <column name="limit_exceeded" type="BOOLEAN"/>
-        </createTable>
-    </changeSet>
 
-    <changeSet id="3" author="suhoi">
+    <changeSet id="2" author="suhoi">
         <createTable schemaName="idf" tableName="limits">
             <column name="limit_id" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
@@ -36,5 +24,24 @@
             <column name="limit_date" type="TIMESTAMP"/>
         </createTable>
     </changeSet>
+
+    <changeSet id="3" author="suhoi">
+        <createTable schemaName="idf" tableName="transactions">
+            <column name="transaction_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="limit_id" type="BIGINT"/>
+            <column name="amount" type="NUMERIC(19, 2)"/>
+            <column name="currency" type="VARCHAR(255)"/>
+            <column name="category" type="VARCHAR(255)"/>
+            <column name="transaction_date" type="TIMESTAMP"/>
+            <column name="limit_exceeded" type="BOOLEAN"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableSchemaName="idf" referencedTableSchemaName="idf" baseTableName="transactions" baseColumnNames="limit_id"
+                                 constraintName="FK_transaction_limit"
+                                 referencedTableName="limits" referencedColumnNames="limit_id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
 
 </databaseChangeLog>

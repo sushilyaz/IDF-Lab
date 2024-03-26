@@ -8,8 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "currency")
 @Data
 public class CurrencyMongo {
-//    @Id
-//    private Long currency_id;
+
+    @Id
     @JsonProperty("currency")
     private String currency;
     @JsonProperty("value")

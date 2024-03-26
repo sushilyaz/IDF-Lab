@@ -34,4 +34,8 @@ public class Transaction {
 
     @Column(name = "limit_exceeded", nullable = false)
     private boolean limitExceeded;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "limit_id") // Название столбца в таблице транзакций, который будет хранить id лимита
+    private Limit limit;
 }
