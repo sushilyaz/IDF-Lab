@@ -1,7 +1,15 @@
 package org.example.idflab.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -13,10 +21,15 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "limits", schema = "idf")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Limit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "limit_id_seq")
+    @SequenceGenerator(name = "limit_id_seq", sequenceName = "idf.limit_id_seq", allocationSize = 1)
     @Column(name = "limit_id")
     private Long limitId;
 
@@ -32,5 +45,9 @@ public class Limit {
     private Category category; // Категория для лимита (по ТЗ необходимо иметь раздельные лимит для категорий)
 
     @Column(name = "limit_date", nullable = false)
+    @CreationTimestamp
     private Timestamp limitDate; // Дата установления лимита
 }
+
+
+

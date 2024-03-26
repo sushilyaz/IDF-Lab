@@ -12,10 +12,14 @@
     </changeSet>
 
     <!-- Создание таблиц в схеме -->
-
     <changeSet id="2" author="suhoi">
+        <createSequence schemaName="idf" cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807" minValue="1" sequenceName="limit_id_seq" startValue="1"/>
+        <createSequence schemaName="idf" cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807" minValue="1" sequenceName="transaction_id_seq" startValue="1"/>
+    </changeSet>
+
+    <changeSet id="3" author="suhoi">
         <createTable schemaName="idf" tableName="limits">
-            <column name="limit_id" type="BIGINT">
+            <column name="limit_id" type="BIGINT" defaultValueComputed="nextval('idf.limit_id_seq')">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="balance" type="NUMERIC(19, 2)"/>
@@ -25,9 +29,9 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="3" author="suhoi">
+    <changeSet id="4" author="suhoi">
         <createTable schemaName="idf" tableName="transactions">
-            <column name="transaction_id" type="BIGINT">
+            <column name="transaction_id" type="BIGINT" defaultValueComputed="nextval('idf.transaction_id_seq')">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="limit_id" type="BIGINT"/>

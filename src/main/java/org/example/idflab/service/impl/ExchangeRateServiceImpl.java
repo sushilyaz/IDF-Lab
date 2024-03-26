@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class ExchangeRateServiceImpl implements ExchangeRateService {
@@ -40,6 +41,12 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     public List<CurrencyMongo> getAllData() {
         List<CurrencyMongo> allData = currencyRepository.findAll();
         return allData;
+    }
+
+    @Override
+    public Double getCurrencyByKey(String key) {
+        Optional<CurrencyMongo> currencyMongo = currencyRepository.findById("USD/" + key);
+        return currencyMongo.map(CurrencyMongo::getValue).orElse(null);
     }
 
 

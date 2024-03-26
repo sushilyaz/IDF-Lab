@@ -8,4 +8,6 @@ import java.util.Map;
 public interface ExchangeRateService {
     List<CurrencyMongo> getLastCourses(List<String> symbols);
     List<CurrencyMongo> getAllData();
+
+    Double getCurrencyByKey(String key);
 }

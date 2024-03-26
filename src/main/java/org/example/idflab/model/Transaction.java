@@ -1,8 +1,15 @@
 package org.example.idflab.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.example.idflab.model.converter.CurrencyConverter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -10,10 +17,15 @@ import java.util.Currency;
 
 @Entity
 @Table(name = "transactions", schema = "idf")
+@EntityListeners(AuditingEntityListener.class)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_id_seq")
+    @SequenceGenerator(name = "transaction_id_seq", sequenceName = "idf.transaction_id_seq", allocationSize = 1)
     @Column(name = "transaction_id")
     private Long transactionId;
 
@@ -30,6 +42,7 @@ public class Transaction {
     private Category category; // Категория
 
     @Column(name = "transaction_date", nullable = false)
+    @CreationTimestamp
     private Timestamp transactionDate; // Так как приложение банковское, я считаю что здесь необходима наносекундная точность + надо учитывать timezone. К тому же timestamp напрямую поддерживается JPA
 
     @Column(name = "limit_exceeded", nullable = false)

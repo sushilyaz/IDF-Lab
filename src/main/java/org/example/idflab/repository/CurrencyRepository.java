@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CurrencyRepository extends MongoRepository<CurrencyMongo, Long> {
-
+public interface CurrencyRepository extends MongoRepository<CurrencyMongo, String> {
 }
