@@ -33,6 +33,12 @@ public class Transaction {
     @Column(nullable = false)
     private BigDecimal amount; // Сумма транзакции. Для вычисления финансовых операций лучше использовать BigDecimal, т.к. он производит вычисление чисел с плавающей точкой без потери точности
 
+    @Column(name = "account_from",nullable = false)
+    private BigDecimal accountFrom;
+
+    @Column(name = "account_to", nullable = false)
+    private BigDecimal accountTo;
+
     @Column(nullable = false)
     @Convert(converter = CurrencyConverter.class) // преобразование из String в Currency и обратно при взаимодействии с БД
     private Currency currency; // Валюта. Сначала думал сделать enum, но решил попробовать так, не знал о таком классе

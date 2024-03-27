@@ -16,16 +16,7 @@ public interface TransactionMapper {
     @Mapping(source = "amount", target = "amount")
     @Mapping(source = "currency", target = "currency")
     @Mapping(source = "category", target = "category")
+    @Mapping(source = "accountFrom", target = "accountFrom")
+    @Mapping(source = "accountTo", target = "accountTo")
     Transaction toEntity(TransactionDtoInput dto);
-
-//    default BigDecimal doubleToBigDecimal(Double amount) {
-//        return BigDecimal.valueOf(amount);
-//    }
-//
-//    default Currency stringToCurrency(String currencyCode) {
-//        return Currency.getInstance(currencyCode);
-//    }
-//    default Category stringToCategory(String categoryCode) {
-//        return Category.valueOf(categoryCode);
-//    }
 }

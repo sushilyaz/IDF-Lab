@@ -37,7 +37,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Transactional
     @Override
     public void doTransaction(TransactionDtoInput dto) {
-        Category currentCategory = dto.getCategory();
+        Category currentCategory = Category.valueOf(dto.getCategory()); // try catch need
         Limit limit = limitService.getLimitByCategory(currentCategory);
         Transaction model = transactionMapper.toEntity(dto);
         model.setLimit(limit);

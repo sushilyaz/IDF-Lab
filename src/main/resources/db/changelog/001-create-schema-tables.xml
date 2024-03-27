@@ -35,6 +35,8 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="limit_id" type="BIGINT"/>
+            <column name="account_from" type="NUMERIC(10,0)"/>
+            <column name="account_to" type="NUMERIC(10,0)"/>
             <column name="amount" type="NUMERIC(19, 2)"/>
             <column name="currency" type="VARCHAR(255)"/>
             <column name="category" type="VARCHAR(255)"/>

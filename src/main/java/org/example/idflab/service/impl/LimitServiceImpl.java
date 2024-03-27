@@ -1,5 +1,7 @@
 package org.example.idflab.service.impl;
 
+import org.example.idflab.dto.NewLimitDto;
+import org.example.idflab.mapper.LimitMapper;
 import org.example.idflab.model.Category;
 import org.example.idflab.model.Limit;
 import org.example.idflab.repository.LimitRepository;
@@ -17,6 +19,9 @@ public class LimitServiceImpl implements LimitService {
     @Autowired
     private LimitRepository limitRepository;
 
+    @Autowired
+    private LimitMapper limitMapper;
+
     @Override
     public Limit getLimitByCategory(Category category) {
         Optional<Limit> limit = limitRepository.findTopByCategoryOrderByLimitDateDesc(category);
@@ -26,6 +31,19 @@ public class LimitServiceImpl implements LimitService {
     @Override
     public void updateBalanceOfLimit(Limit limit) {
         limitRepository.saveAndFlush(limit);
+    }
+
+    @Override
+    public void setNewLimit(NewLimitDto dto) {
+        Optional<Limit> lastLimit = limitRepository.findTopByCategoryOrderByLimitDateDesc(dto.getCategory());
+
+        Limit model = limitMapper.toEntity(dto);
+        if (lastLimit.isPresent()) {
+            model.setBalance(lastLimit.get().getBalance().add(dto.getAmount()));
+        } else {
+            model.setBalance(dto.getAmount());
+        }
+        limitRepository.save(model);
     }
 
     private Limit setDefaultLimit(Category category) {
