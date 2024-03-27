@@ -1,6 +1,6 @@
 ## Порядок запуска
 1) git clone git@github.com:sushilyaz/IDF-Lab.git
-2) docker-compose up
+2) docker-compose up // в ней 2 БД - postgres and mongo
 ## P.S. 
 Основные требования выполнил, дополнительные - не все.
 Код комментировал. Докерфайл, докер-композ, логи не успел. Если ваш набор еще не закончен - могу доделать
