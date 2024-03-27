@@ -37,10 +37,15 @@ public class TransactionServiceImpl implements TransactionService {
     @Autowired
     private ExchangeRateService exchangeRateService;
 
+    /**
+     * Транзакция. Если лимит не установлен - автоматически установится лимит по умолчанию
+     * Также здесь проверка на превышение лимита транзакции
+     * @param dto
+     */
     @Transactional
     @Override
     public void doTransaction(TransactionDtoInput dto) {
-        Category currentCategory = Category.valueOf(dto.getExpenseCategory()); // try catch need
+        Category currentCategory = Category.valueOf(dto.getExpenseCategory());
         Limit limit = limitService.getLimitByCategory(currentCategory);
         Transaction model = transactionMapper.toEntity(dto);
         model.setLimit(limit);
@@ -48,12 +53,21 @@ public class TransactionServiceImpl implements TransactionService {
         transactionRepository.save(model);
     }
 
+    /**
+     * Возвращает транзакции, превысившие лимит и сами лимиты
+     * @return
+     */
     @Override
     public List<TransactionExceededLimitDTO> getLimitExceededTrans() {
-        List<TransactionExceededLimitDTO> asd = transactionRepository.findTransactionsExceedingLimit();
-        return asd;
+        return transactionRepository.findTransactionsExceedingLimit();
     }
 
+    /**
+     * проверка на превышение лимита транзакции
+     * @param dto
+     * @param limit
+     * @return
+     */
     boolean isLimitExceeded(TransactionDtoInput dto, Limit limit) {
         BigDecimal transactionCurrencyCourseUSD = exchangeRateService.getCurrencyByKey(dto.getCurrencyShortname());
         BigDecimal toUSD = dto.getSum().divide(transactionCurrencyCourseUSD, 2, RoundingMode.HALF_UP);

@@ -24,17 +24,30 @@ public class LimitServiceImpl implements LimitService {
     @Autowired
     private LimitMapper limitMapper;
 
+    /**
+     * Получение лимита по категории
+     * @param category
+     * @return
+     */
     @Override
     public Limit getLimitByCategory(Category category) {
         Optional<Limit> limit = limitRepository.findTopByLimitCategoryOrderByLimitDatetimeDesc(category);
         return limit.orElseGet(() -> setDefaultLimit(category));
     }
 
+    /**
+     * Апдейт остатка лимита, А НЕ САМОГО ЛИМИТА!!!
+     * @param limit
+     */
     @Override
     public void updateBalanceOfLimit(Limit limit) {
         limitRepository.saveAndFlush(limit);
     }
 
+    /**
+     * Установка лимита по желанию клиента
+     * @param dto
+     */
     @Override
     public void setNewLimit(NewLimitDto dto) {
         Optional<Limit> lastLimit = limitRepository.findTopByLimitCategoryOrderByLimitDatetimeDesc(Category.valueOf(dto.getLimitCategory()));
@@ -48,11 +61,20 @@ public class LimitServiceImpl implements LimitService {
         limitRepository.save(model);
     }
 
+    /**
+     * Возвращает текущие лимиты для категорий
+     * @return
+     */
     @Override
     public List<AllLimitDTO> getCurrentLimit() {
         return limitRepository.findLatestLimitsByCategory();
     }
 
+    /**
+     * Установка лимита по умолчанию, если он не установлен
+     * @param category
+     * @return
+     */
     private Limit setDefaultLimit(Category category) {
         Limit defaultLimit = Limit.builder()
                 .balance(BigDecimal.valueOf(1000))

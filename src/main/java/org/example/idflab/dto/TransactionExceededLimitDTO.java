@@ -10,6 +10,9 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Currency;
 
+/**
+ * DTO для получения транзакций с превышенным лимитом, согласно ТЗ
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

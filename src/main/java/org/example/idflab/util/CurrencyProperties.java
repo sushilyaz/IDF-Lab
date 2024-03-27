@@ -6,6 +6,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Запрос валюты из файла application.yml
+ */
 @Component
 @ConfigurationProperties(prefix = "spring.cloud.openfeign")
 public class CurrencyProperties {

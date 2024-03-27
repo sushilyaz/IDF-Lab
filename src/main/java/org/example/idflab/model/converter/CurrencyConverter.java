@@ -6,7 +6,7 @@ import jakarta.persistence.Converter;
 import java.util.Currency;
 
 /**
- * Конвертер
+ * Конвертер для Currency
  */
 @Converter
 public class CurrencyConverter implements AttributeConverter<Currency, String> {

@@ -15,6 +15,9 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Currency;
 
+/**
+ * Модель транзакции
+ */
 @Entity
 @Table(name = "transactions", schema = "idf")
 @EntityListeners(AuditingEntityListener.class)

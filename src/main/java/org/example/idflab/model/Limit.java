@@ -16,7 +16,6 @@ import java.sql.Timestamp;
 
 /**
  * Модель Limit
- * Поле Currency отсутствует, т.к. лимит всегда устанавливается в USD
  */
 @Entity
 @Table(name = "limits", schema = "idf")

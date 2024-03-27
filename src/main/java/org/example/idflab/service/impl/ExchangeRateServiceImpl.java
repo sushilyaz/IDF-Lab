@@ -25,6 +25,11 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     @Autowired
     private CurrencyRepository currencyRepository;
 
+    /**
+     * Получение последнего курса валют(запрос к внешнему апи)
+     * @param symbols
+     * @return
+     */
     @Override
     public List<CurrencyMongo> getLastCourses(List<String> symbols) {
         List<CurrencyMongo> exchangeRates = new ArrayList<>();
@@ -37,12 +42,20 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
         return exchangeRates;
     }
 
+    /**
+     * Получение всех валют (для проверки)
+     */
     @Override
     public List<CurrencyMongo> getAllData() {
         List<CurrencyMongo> allData = currencyRepository.findAll();
         return allData;
     }
 
+    /**
+     * Получение курса запрашиваемой валюты
+     * @param key
+     * @return
+     */
     @Override
     public BigDecimal getCurrencyByKey(String key) {
         Optional<CurrencyMongo> currencyMongo = currencyRepository.findById("USD/" + key);

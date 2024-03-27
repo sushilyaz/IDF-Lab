@@ -13,6 +13,11 @@ import java.util.Optional;
 @Repository
 public interface LimitRepository extends JpaRepository<Limit, Long> {
     Optional<Limit> findTopByLimitCategoryOrderByLimitDatetimeDesc (Category category);
+
+    /**
+     * Запрос актульных лимиотов для всех категорий
+     * @return
+     */
     @Query("SELECT new org.example.idflab.dto.AllLimitDTO(l.limitSum, l.limitCategory, l.limitDatetime, l.limitCurrencyShortname) " +
             "FROM Limit l " +
             "WHERE l.limitDatetime = ( " +
