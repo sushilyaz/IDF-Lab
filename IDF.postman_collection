@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "6df5148f-f967-4e27-acb4-468a42dc8f07",
+		"name": "IFT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32422517"
+	},
+	"item": [
+		{
+			"name": "get-last-course",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/get-last-course",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"get-last-course"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-course",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/get-course",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"get-course"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "do-transaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountFrom\": \"1230000000\",\r\n    \"accountTo\": \"9999999999\",\r\n    \"sum\": 50000.01,\r\n    \"currencyShortname\": \"RUB\",\r\n    \"expenseCategory\": \"SERVICES\" ,\r\n    \"datetime\": \"2024-01-30T00:00:00+06:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/transaction-action/do-transaction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transaction-action",
+						"do-transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-new-limit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"limitSum\": 2000,\r\n    \"limitCategory\": \"SERVICES\",\r\n    \"limitCurrencyShortname\": \"USD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/limit-action/create-new-limit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"limit-action",
+						"create-new-limit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-current-limits",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"limitSum\": 2000,\r\n    \"limitCategory\": \"SERVICES\",\r\n    \"limitCurrencyShortname\": \"USD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/get-all-current-limits",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"get-all-current-limits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-limit-exceeded-trans",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/transaction-action/get-trans-limit-exceeded",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transaction-action",
+						"get-trans-limit-exceeded"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "openApi",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api-docs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api-docs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -3,6 +3,7 @@ package org.example.idflab.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.idflab.exception.ParseExternalApiDataException;
 import org.example.idflab.model.CurrencyMongo;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,7 @@ public class Parser {
         try {
            node = objectMapper.readTree(response);
         } catch (JsonProcessingException e) {
-            System.out.println("cant parse twelvedata");
+            throw new ParseExternalApiDataException("Cant parse data from external API");
         }
         String symbol = node.get("meta").get("symbol").asText();
         BigDecimal close = new BigDecimal(node.get("values").get(0).get("close").asText());
