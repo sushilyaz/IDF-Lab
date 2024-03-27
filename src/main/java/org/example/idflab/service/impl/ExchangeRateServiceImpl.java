@@ -8,9 +8,9 @@ import org.example.idflab.util.Parser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -44,7 +44,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     }
 
     @Override
-    public Double getCurrencyByKey(String key) {
+    public BigDecimal getCurrencyByKey(String key) {
         Optional<CurrencyMongo> currencyMongo = currencyRepository.findById("USD/" + key);
         return currencyMongo.map(CurrencyMongo::getValue).orElse(null);
     }

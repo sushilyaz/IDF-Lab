@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.idflab.model.CurrencyMongo;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class Parser {
             System.out.println("cant parse twelvedata");
         }
         String symbol = node.get("meta").get("symbol").asText();
-        Double close = Double.valueOf(node.get("values").get(0).get("close").asText());
+        BigDecimal close = new BigDecimal(node.get("values").get(0).get("close").asText());
         return new CurrencyMongo(symbol, close);
     }
 }

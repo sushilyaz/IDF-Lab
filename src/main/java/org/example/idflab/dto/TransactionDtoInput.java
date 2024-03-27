@@ -5,12 +5,14 @@ import lombok.Data;
 import org.example.idflab.model.Category;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 @Data
 public class TransactionDtoInput {
-    private BigDecimal accountFrom;
-    private BigDecimal accountTo;
-    private Double amount;
-    private String currency;
-    private String category;
+    private Long accountFrom;
+    private Long accountTo;
+    private BigDecimal sum;
+    private String currencyShortname;
+    private String expenseCategory;
+    private Timestamp datetime;
 }

@@ -2,12 +2,12 @@ package org.example.idflab.service;
 
 import org.example.idflab.model.CurrencyMongo;
 
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 public interface ExchangeRateService {
     List<CurrencyMongo> getLastCourses(List<String> symbols);
     List<CurrencyMongo> getAllData();
 
-    Double getCurrencyByKey(String key);
+    BigDecimal getCurrencyByKey(String key);
 }

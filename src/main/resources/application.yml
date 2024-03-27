@@ -7,11 +7,15 @@ spring:
   liquibase:
     enabled: true
     change-log: db/changelog/changelog.xml
-    default-schema: migration
+    default-schema: idf
+    liquibase-schema: service
   jpa:
     hibernate:
       ddl-auto: validate
     show-sql: true
+#    properties:
+#      hibernate:
+#        default_schema: idf
   data:
     mongodb:
       uri: mongodb://localhost:27017/suhoiDB
@@ -24,3 +28,20 @@ spring:
       currencies:
         - USD/KZT
         - USD/RUB
+application:
+  openapi:
+    title: 'OpenApi specification - Banking Service'
+    version: '1.0'
+    description: 'OpenApi documentation for Banking Service'
+    contact:
+      name: 'suhoi'
+      email: 'suhoio2k00@gmail.com'
+    server:
+      url: 'http://localhost:8080/'
+      description: 'Local ENV'
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger

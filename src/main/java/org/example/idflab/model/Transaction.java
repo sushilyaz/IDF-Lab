@@ -29,9 +29,6 @@ public class Transaction {
     @Column(name = "transaction_id")
     private Long transactionId;
 
-    // Сумма транзакции
-    @Column(nullable = false)
-    private BigDecimal amount; // Сумма транзакции. Для вычисления финансовых операций лучше использовать BigDecimal, т.к. он производит вычисление чисел с плавающей точкой без потери точности
 
     @Column(name = "account_from",nullable = false)
     private BigDecimal accountFrom;
@@ -39,17 +36,20 @@ public class Transaction {
     @Column(name = "account_to", nullable = false)
     private BigDecimal accountTo;
 
+    // Сумма транзакции
     @Column(nullable = false)
+    private BigDecimal sum; // Сумма транзакции. Для вычисления финансовых операций лучше использовать BigDecimal, т.к. он производит вычисление чисел с плавающей точкой без потери точности
+
+    @Column(name = "currency_shortname", nullable = false)
     @Convert(converter = CurrencyConverter.class) // преобразование из String в Currency и обратно при взаимодействии с БД
-    private Currency currency; // Валюта. Сначала думал сделать enum, но решил попробовать так, не знал о таком классе
+    private Currency currencyShortname; // Валюта. Сначала думал сделать enum, но решил попробовать так, не знал о таком классе
+
+    @Column(name = "expense_category", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Category expenseCategory; // Категория
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Category category; // Категория
-
-    @Column(name = "transaction_date", nullable = false)
-    @CreationTimestamp
-    private Timestamp transactionDate; // Так как приложение банковское, я считаю что здесь необходима наносекундная точность + надо учитывать timezone. К тому же timestamp напрямую поддерживается JPA
+    private Timestamp datetime; // Так как приложение банковское, я считаю что здесь необходима наносекундная точность + надо учитывать timezone. К тому же timestamp напрямую поддерживается JPA
 
     @Column(name = "limit_exceeded", nullable = false)
     private boolean limitExceeded;

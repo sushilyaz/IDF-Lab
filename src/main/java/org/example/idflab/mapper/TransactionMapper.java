@@ -13,10 +13,10 @@ import java.util.Currency;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE,
         componentModel = "spring")
 public interface TransactionMapper {
-    @Mapping(source = "amount", target = "amount")
-    @Mapping(source = "currency", target = "currency")
-    @Mapping(source = "category", target = "category")
-    @Mapping(source = "accountFrom", target = "accountFrom")
-    @Mapping(source = "accountTo", target = "accountTo")
+//    @Mapping(source = "amount", target = "amount")
+//    @Mapping(source = "currency", target = "currency")
+//    @Mapping(source = "category", target = "category")
+//    @Mapping(source = "accountFrom", target = "accountFrom")
+//    @Mapping(source = "accountTo", target = "accountTo")
     Transaction toEntity(TransactionDtoInput dto);
 }

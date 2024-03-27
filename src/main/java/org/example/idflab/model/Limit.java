@@ -36,17 +36,20 @@ public class Limit {
     @Column(nullable = false)
     private BigDecimal balance; // Остаток лимита. Буду вычитать из него значение произведенной транзакции. При обновлении лимита буду прибавлять
 
-    @Column(nullable = false)
-    private BigDecimal amount; /* Общий лимит. Допустим, пользователь хочет посмотреть свой общий лимит, поле необходимо для этого.
+    @Column(name = "limit_sum", nullable = false)
+    private BigDecimal limitSum; /* Общий лимит. Допустим, пользователь хочет посмотреть свой общий лимит, поле необходимо для этого.
     Или в дальнейшем необходимо будет в зависимости от "карты" устанавливать разные лимиты. Это поле может пригодиться */
 
-    @Column(nullable = false)
+    @Column(name = "limit_category", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Category category; // Категория для лимита (по ТЗ необходимо иметь раздельные лимит для категорий)
+    private Category limitCategory; // Категория для лимита (по ТЗ необходимо иметь раздельные лимит для категорий)
 
-    @Column(name = "limit_date", nullable = false)
+    @Column(name = "limit_datetime", nullable = false)
     @CreationTimestamp
-    private Timestamp limitDate; // Дата установления лимита
+    private Timestamp limitDatetime; // Дата установления лимита
+
+    @Column(name = "limit_currency_shortname", nullable = false)
+    private String limitCurrencyShortname;
 }
 
 

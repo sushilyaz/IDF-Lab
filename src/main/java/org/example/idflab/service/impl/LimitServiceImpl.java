@@ -1,5 +1,6 @@
 package org.example.idflab.service.impl;
 
+import org.example.idflab.dto.AllLimitDTO;
 import org.example.idflab.dto.NewLimitDto;
 import org.example.idflab.mapper.LimitMapper;
 import org.example.idflab.model.Category;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,7 +26,7 @@ public class LimitServiceImpl implements LimitService {
 
     @Override
     public Limit getLimitByCategory(Category category) {
-        Optional<Limit> limit = limitRepository.findTopByCategoryOrderByLimitDateDesc(category);
+        Optional<Limit> limit = limitRepository.findTopByLimitCategoryOrderByLimitDatetimeDesc(category);
         return limit.orElseGet(() -> setDefaultLimit(category));
     }
 
@@ -35,23 +37,28 @@ public class LimitServiceImpl implements LimitService {
 
     @Override
     public void setNewLimit(NewLimitDto dto) {
-        Optional<Limit> lastLimit = limitRepository.findTopByCategoryOrderByLimitDateDesc(dto.getCategory());
-
+        Optional<Limit> lastLimit = limitRepository.findTopByLimitCategoryOrderByLimitDatetimeDesc(Category.valueOf(dto.getLimitCategory()));
         Limit model = limitMapper.toEntity(dto);
         if (lastLimit.isPresent()) {
-            model.setBalance(lastLimit.get().getBalance().add(dto.getAmount()));
+            BigDecimal newBalance = lastLimit.get().getBalance().add(dto.getLimitSum()).subtract(lastLimit.get().getLimitSum());
+            model.setBalance(newBalance);
         } else {
-            model.setBalance(dto.getAmount());
+            model.setBalance(dto.getLimitSum());
         }
         limitRepository.save(model);
+    }
+
+    @Override
+    public List<AllLimitDTO> getCurrentLimit() {
+        return limitRepository.findLatestLimitsByCategory();
     }
 
     private Limit setDefaultLimit(Category category) {
         Limit defaultLimit = Limit.builder()
                 .balance(BigDecimal.valueOf(1000))
-                .amount(new BigDecimal("1000"))
-                .category(category)
-                .limitDate(new Timestamp(System.currentTimeMillis()))
+                .limitSum(new BigDecimal("1000"))
+                .limitCategory(category)
+                .limitCurrencyShortname("USD")
                 .build();
         limitRepository.save(defaultLimit);
         return defaultLimit;

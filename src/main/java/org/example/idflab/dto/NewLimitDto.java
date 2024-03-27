@@ -6,6 +6,7 @@ import org.example.idflab.model.Category;
 import java.math.BigDecimal;
 @Data
 public class NewLimitDto {
-    private BigDecimal amount;
-    private Category category;
+    private BigDecimal limitSum;
+    private String limitCategory;
+    private String limitCurrencyShortname;
 }
