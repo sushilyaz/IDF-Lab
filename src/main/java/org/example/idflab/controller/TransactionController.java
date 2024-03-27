@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 2 API. в 1 входит транзакция, согласно условию ТЗ, 2 возвращает транзакции, помеченные флагом LimitExceeded = true
+ */
 @RestController
 @RequestMapping("/api/transaction-action")
 public class TransactionController {

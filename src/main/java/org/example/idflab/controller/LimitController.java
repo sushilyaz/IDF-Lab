@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 2 API для получения лимитов и для создания нового лимита, согласно ТЗ
+ */
 @RestController
 @RequestMapping("/api/limit-action")
 public class LimitController {

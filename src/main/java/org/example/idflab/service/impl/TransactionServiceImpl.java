@@ -54,7 +54,7 @@ public class TransactionServiceImpl implements TransactionService {
         return asd;
     }
 
-    private boolean isLimitExceeded(TransactionDtoInput dto, Limit limit) {
+    boolean isLimitExceeded(TransactionDtoInput dto, Limit limit) {
         BigDecimal transactionCurrencyCourseUSD = exchangeRateService.getCurrencyByKey(dto.getCurrencyShortname());
         BigDecimal toUSD = dto.getSum().divide(transactionCurrencyCourseUSD, 2, RoundingMode.HALF_UP);
         BigDecimal substruct = limit.getBalance().subtract(toUSD);

@@ -15,26 +15,44 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    liquibaseVersion = '4.26.0'
+    preLiquibaseVersion = '1.5.0'
+    lombokVersion = '1.18.30'
+    mapstructVersion = '1.5.5.Final'
+    lombokMapstructBindingVersion = '0.2.0'
+    postgresqlVersion = '42.7.3'
+    springdocVersion = '2.3.0'
+    assertjCoreVersion = '3.25.3'
+    openFeignVersion = '4.1.0'
+    loadbalancedVersion = '4.1.0'
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.0'
-    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer:4.1.0'
-    implementation 'net.lbruun.springboot:preliquibase-spring-boot-starter:1.5.0'
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+    implementation "org.springframework.cloud:spring-cloud-starter-openfeign:${openFeignVersion}"
+    implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer:${loadbalancedVersion}"
+    implementation "net.lbruun.springboot:preliquibase-spring-boot-starter:${preLiquibaseVersion}"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocVersion}"
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    compileOnly 'org.mapstruct:mapstruct:1.5.5.Final'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
-    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
-    implementation 'org.liquibase:liquibase-core'
+    compileOnly "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+    implementation "org.liquibase:liquibase-core:${liquibaseVersion}"
 //    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly "org.postgresql:postgresql:${postgresqlVersion}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:postgresql'
+    testImplementation "org.assertj:assertj-core:${assertjCoreVersion}"
 }
 
-tasks.named('test') {
+tasks.test {
     useJUnitPlatform()
 }

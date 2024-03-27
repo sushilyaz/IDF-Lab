@@ -24,6 +24,10 @@ public class ExchangeRateController {
     @Autowired
     private CurrencyProperties currencyProperties;
 
+    /**
+     * Апи для получения курса (обращение к внешнему АПИ)
+     * @return
+     */
     @GetMapping("/api/get-last-course")
     public ResponseEntity<List<CurrencyMongo>> getLastCourse() {
         List<String> symbols = currencyProperties.getCurrencies();
@@ -33,6 +37,10 @@ public class ExchangeRateController {
                 .body(resultList);
     }
 
+    /**
+     * Для проверки
+     * @return
+     */
     @GetMapping("/get-course")
     public ResponseEntity<List<CurrencyMongo>> getCourse() {
         List<CurrencyMongo> resultList = exchangeRateService.getAllData();
