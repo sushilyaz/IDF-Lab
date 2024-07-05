@@ -22,6 +22,12 @@ limit_exceeded);
 валюта (USD)).
 ## Ссылка на ТЗ (яндекс диск):
 [Banking Microservices](https://docs.yandex.ru/docs/view?url=ya-disk%3A%2F%2F%2Fdisk%2F%D0%A2%D0%B5%D1%81%D1%82%D0%BE%D0%B2%D0%BE%D0%B5_%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_Junior_Java_%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%B0_.pdf&name=%D0%A2%D0%B5%D1%81%D1%82%D0%BE%D0%B2%D0%BE%D0%B5_%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_Junior_Java_%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%B0_.pdf&uid=1974528072)
+## Используемый стек:
+* Spring Boot, Spring Cloud (feign client), Spring Web
+* PostgreSQL
+* MongoDB
+* Liquibase
+* Testcontrainers
 ## Порядок запуска
 1) git clone git@github.com:sushilyaz/IDF-Lab.git
 2) docker-compose up // в ней 2 БД - postgres and mongo
